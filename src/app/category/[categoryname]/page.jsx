@@ -12,7 +12,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import Link from "next/link";
-const page = () => {
+const Page = () => {
   const { categoryname } = useParams();
   const { productsData } = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
@@ -99,4 +99,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

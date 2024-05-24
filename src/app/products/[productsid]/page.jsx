@@ -11,7 +11,7 @@ import lgRotate from "lightgallery/css/lg-rotate.css";
 import lgAutoplay from "lightgallery/css/lg-autoplay.css";
 import { Button } from "@material-tailwind/react";
 
-const page = () => {
+const Page = () => {
   const { productsid } = useParams();
   console.log(productsid);
 
@@ -134,4 +134,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
