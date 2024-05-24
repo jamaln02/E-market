@@ -4,6 +4,7 @@ import { Provider } from "@/clientExports";
 
 import { store } from "@/clientExports";
 import Header from "../component/HeaderComponent/Header";
+import Footer from "../component/Footer";
 
 const MainLayout = ({ children }) => {
   return (
@@ -12,6 +13,7 @@ const MainLayout = ({ children }) => {
         <Provider store={store}>
           <Header />
           <div className="container mx-auto">{children}</div>
+          <Footer />
         </Provider>
       </ThemeProvider>
     </div>

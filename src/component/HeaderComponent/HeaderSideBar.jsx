@@ -12,12 +12,13 @@ import {
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "@/src/ReduxSystem/ReduxSlices/productsSlice";
+import Link from "next/link";
 const HeaderSideBar = () => {
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const { categoriesData } = useSelector((state) => state.allProducts);
-
+  console.log(categoriesData);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());
@@ -33,7 +34,7 @@ const HeaderSideBar = () => {
         <Drawer
           open={open}
           onClose={closeDrawer}
-          className="shadow-none bg-main overflow-y-scroll !max-h-none "
+          className="shadow-none bg-main overflow-y-scroll !max-h-none ddd"
         >
           <div className="mb-2 flex items-center justify-between p-4 text-white ">
             <Typography variant="h4" className="tracking-wide">
@@ -58,7 +59,9 @@ const HeaderSideBar = () => {
           </div>
           <List className="text-white ">
             {categoriesData?.map((ele, ind) => (
-              <ListItem key={ind}>{ele}</ListItem>
+              <ListItem key={ind}>
+                <Link href={`/category/${ele.slug}`}>{ele.name}</Link>
+              </ListItem>
             ))}
           </List>
         </Drawer>

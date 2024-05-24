@@ -3,8 +3,8 @@ import HomeSlider from "../component/Home/HomeSlider";
 
 export default function Home() {
   return (
-    <main className="">
-      <section className="z-0">
+    <main>
+      <section>
         <HomeSlider />
         <HomeBody />
       </section>

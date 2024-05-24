@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lightgallery.css");
+@import url("https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-zoom.css");
+@import url("https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-video.css");
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -52,9 +54,16 @@ body {
 }
 #lblCartCount {
   font-size: 16px;
-  background: #ff0000;
+  background: rgb(65, 65, 151);
   color: #fff;
   padding: 0 5px;
   vertical-align: bottom;
   margin-left: 10px;
+}
+
+.lg-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }

@@ -4,13 +4,13 @@ const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const getAllProducts = createAsyncThunk(
   "getAllProducts",
-  async (id, thunkAPI) => {
+  async (id = "", thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
 
     try {
       const details = await axios({
         method: "get",
-        url: `https://dummyjson.com/products/`,
+        url: `https://dummyjson.com/products/${id}`,
       });
       return details.data;
     } catch (er) {
@@ -53,6 +53,7 @@ const products = createSlice({
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.productsLoading = false;
       state.productsData = action.payload;
+      console.log(action.payload);
     });
     builder.addCase(getAllProducts.rejected, (state, action) => {
       state.productsLoading = false;
