@@ -41,11 +41,38 @@ const data = {
   productsError: null,
   productsLoading: false,
   categoriesData: null,
+  productDetailsCount: 0,
+  cart: [],
 };
 
 const products = createSlice({
   name: "products",
   initialState: data,
+  reducers: {
+    increment: (state) => {
+      state.productDetailsCount += 1;
+    },
+    decrement: (state) => {
+      if (state.productDetailsCount > 0) {
+        state.productDetailsCount -= 1;
+      }
+    },
+    addToCart: (state, action) => {
+      let check = state.cart.some(
+        (products) => products.id == action.payload.id
+      );
+
+      if (check) {
+        increment(action.payload.item);
+        console.log(action.payload.item);
+      } else {
+        action.payload = { ...action.payload, item: 1 };
+
+        state.cart = [...state.cart, action.payload];
+      }
+      console.log(state.cart);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllProducts.pending, (state, action) => {
       state.productsLoading = true;
@@ -70,3 +97,5 @@ const products = createSlice({
 });
 
 export const allProducts = products.reducer;
+
+export const { increment, decrement, addToCart } = products.actions;

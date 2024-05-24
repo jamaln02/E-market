@@ -29,6 +29,7 @@ module.exports = withMT({
       },
       colors: {
         main: "#4C6AA6",
+        bgcart: "#bbc7dd",
       },
     },
   },
