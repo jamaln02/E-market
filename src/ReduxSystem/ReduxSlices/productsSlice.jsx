@@ -51,11 +51,10 @@ const products = createSlice({
   initialState: data,
   reducers: {
     increment: (state, action) => {
-      console.log(action);
       let check = state.cart.some(
         (products) => products.id == action.payload.id
       );
-      console.log(check);
+
       if (check) {
         let newCart = state.cart.map((ele) => {
           if (action.payload.id == ele.id) {
@@ -68,13 +67,8 @@ const products = createSlice({
       } else {
         state.productsData.item += 1;
       }
-
-      console.log(action.payload);
-      console.log(state.cart);
     },
     decrement: (state, action) => {
-      console.log(action);
-
       let newCart = state.cart.map((ele) => {
         if (action.payload.id == ele.id && ele.item > 0) {
           ele.item -= 1;
@@ -83,9 +77,6 @@ const products = createSlice({
         return ele;
       });
       state.cart = newCart;
-
-      console.log(action.payload);
-      console.log(state.cart);
     },
     cartDelet: (state, action) => {
       let newCart = state.cart.filter((ele) => ele.id !== action.payload.id);
@@ -100,11 +91,9 @@ const products = createSlice({
 
       if (check) {
         increment(action.payload);
-        console.log(action.payload);
       } else {
         increment(action.payload);
         state.cart = [...state.cart, action.payload];
-        console.log(state.cart);
       }
     },
     cartEmpty: (state, action) => {

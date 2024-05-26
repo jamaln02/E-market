@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getProductsSearch,
   handleSearch,
+  openNav,
 } from "@/src/ReduxSystem/ReduxSlices/headerSlice";
 import Link from "next/link";
 const HeaderSearch = () => {
   const dispatch = useDispatch();
-  const { inputValue, searchResultsData } = useSelector(
-    (state) => state.headerSlicee
-  );
-  console.log(inputValue);
-  console.log(searchResultsData);
-
+  const { inputValue, nav } = useSelector((state) => state.headerSlicee);
+  const handleClick = () => {
+    dispatch(getProductsSearch(inputValue));
+    dispatch(openNav(!nav));
+  };
   return (
     <div className=" relative flex">
       <Input
@@ -28,7 +28,7 @@ const HeaderSearch = () => {
           size="sm"
           color={"white"}
           className="!absolute right-1 top-1 rounded"
-          onClick={() => dispatch(getProductsSearch(inputValue))}
+          onClick={handleClick}
         >
           Search
         </Button>

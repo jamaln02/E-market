@@ -1,6 +1,6 @@
 "use client";
 import { getProductsSearch } from "@/src/ReduxSystem/ReduxSlices/headerSlice";
-import LoaderPage from "@/src/component/LoaderPage";
+
 import SearchLoader from "@/src/component/SearchLoader";
 import {
   Button,
@@ -17,11 +17,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Page = () => {
   const { searchValue } = useParams();
-  console.log(searchValue);
+
   const { searchResultsLoading, searchResultsData } = useSelector(
     (state) => state.headerSlicee
   );
-  console.log(searchResultsData);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductsSearch(searchValue));
@@ -35,7 +35,7 @@ const Page = () => {
         </div>
       ) : (
         <div className="mt-6 md:mt-11 lg:mt-16 p-5 text-gray-500 dark:text-gray-600">
-          {searchResultsData.length == 0 ? (
+          {searchResultsData?.length == 0 ? (
             <div className="flex justify-center items-center w-full h-[50svh]">
               <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-main">
                 Sorry, No Products Found!

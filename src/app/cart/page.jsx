@@ -27,8 +27,7 @@ const TABLE_HEAD = [
 const Page = () => {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.allProducts);
-  console.log(cart);
-  let total = 0;
+
   return (
     <div className="container mx-auto p-4 flex flex-col justify-center items-center">
       {cart.length > 0 ? (
