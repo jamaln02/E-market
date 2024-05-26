@@ -13,7 +13,9 @@ const HeaderSearch = () => {
   const { inputValue, nav } = useSelector((state) => state.headerSlicee);
   const handleClick = () => {
     dispatch(getProductsSearch(inputValue));
-    dispatch(openNav(!nav));
+    if (window.innerWidth <= 1024) {
+      dispatch(openNav(!nav));
+    }
   };
   return (
     <div className=" relative flex">
