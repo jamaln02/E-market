@@ -44,7 +44,7 @@ const Page = () => {
                   {TABLE_HEAD.map((head) => (
                     <th
                       key={head}
-                      className="border-b border-blue-gray-100 bg-bgcart p-4"
+                      className="border-b border-blue-gray-100  bg-bgcart p-4"
                     >
                       <Typography
                         variant="h6"
@@ -57,7 +57,7 @@ const Page = () => {
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="dark:bg-gray-500">
                 {cart?.map((ele, index) => {
                   const isLast = index === cart.length - 1;
                   const classes = isLast
@@ -70,7 +70,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal dark:text-gray-200"
                         >
                           {index + 1}
                         </Typography>
@@ -79,7 +79,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal dark:text-gray-200"
                         >
                           {ele?.title}
                         </Typography>
@@ -88,7 +88,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal dark:text-gray-200"
                         >
                           {`EGP ${(
                             ele?.price -
@@ -100,18 +100,18 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-medium"
+                          className="font-medium dark:text-gray-200"
                         >
                           <div className="flex items-center text-gray-900 rounded-md  p-0.5">
                             {" "}
                             <Button
-                              className="bg-bgcart text-lg  px-3 py-0.5 font-bold    rounded-md "
+                              className="bg-bgcart text-lg  px-3 py-0.5 font-bold rounded-md "
                               onClick={() => dispatch(decrement(ele))}
                               disabled={ele.item <= 1}
                             >
                               -
                             </Button>
-                            <p className="bg-white px-3 py-0.5 font-bold border border-gray-600  rounded-md mx-0.5">
+                            <p className="bg-white dark:bg-gray-600 px-3 py-0.5 font-bold border border-gray-600 dark:border-gray-200 dark:text-gray-200  rounded-md mx-0.5">
                               {ele.item}
                             </p>
                             <Button
@@ -127,7 +127,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal dark:text-gray-200"
                         >
                           {`EGP ${
                             (
@@ -141,10 +141,10 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-normal dark:text-gray-200"
                         >
                           <Button
-                            className="text-main font-bold"
+                            className="text-main font-bold "
                             variant="text"
                             onClick={() => dispatch(cartDelet(ele))}
                           >
@@ -158,7 +158,7 @@ const Page = () => {
               </tbody>
             </table>
           </Card>
-          <div className="flex flex-col w-full p-2 bg-white mt-5 rounded-md">
+          <div className="flex flex-col w-full p-2 bg-white dark:bg-gray-500 mt-5 rounded-md">
             <div className="flex md:flex-row flex-col justify-between p-2 items-center">
               <div>
                 <Button
@@ -178,17 +178,15 @@ const Page = () => {
                 </p>
                 <span className="text-main font-bold text-xl">
                   EGP{" "}
-                  {
-                    (total = cart
-                      ?.map(
-                        (ele) =>
-                          (ele?.price -
-                            (ele?.price * ele?.discountPercentage) / 100) *
-                          ele?.item
-                      )
-                      ?.reduce((one, tow) => one + tow)
-                      ?.toFixed(2))
-                  }
+                  {cart
+                    ?.map(
+                      (ele) =>
+                        (ele?.price -
+                          (ele?.price * ele?.discountPercentage) / 100) *
+                        ele?.item
+                    )
+                    ?.reduce((one, tow) => one + tow)
+                    ?.toFixed(2)}
                 </span>
               </div>
             </div>

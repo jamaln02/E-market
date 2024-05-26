@@ -21,7 +21,7 @@ const ProductsCard = () => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
-  console.log(productsData);
+
   return (
     <div>
       {productsLoading ? (
