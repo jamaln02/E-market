@@ -57,7 +57,12 @@ const HeaderSideBar = () => {
           <List className="text-white ">
             {categoriesData?.map((ele, ind) => (
               <ListItem key={ind}>
-                <Link href={`/category/${ele.slug}`}>{ele.name}</Link>
+                <Link
+                  href={`/category/${ele.slug}`}
+                  onClick={() => dispatch(handleCloseDrawer())}
+                >
+                  {ele.name}
+                </Link>
               </ListItem>
             ))}
           </List>
