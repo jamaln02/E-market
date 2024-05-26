@@ -10,7 +10,7 @@ export const getAllProducts = createAsyncThunk(
     try {
       const details = await axios({
         method: "get",
-        url: `https://dummyjson.com/products/${id}`,
+        url: `https://dummyjson.com/products/${id}?limit=0`,
       });
       return details.data;
     } catch (er) {
@@ -43,34 +43,72 @@ const data = {
   categoriesData: null,
   productDetailsCount: 0,
   cart: [],
+  cartProductCount: 1,
 };
 
 const products = createSlice({
   name: "products",
   initialState: data,
   reducers: {
-    increment: (state) => {
-      state.productDetailsCount += 1;
-    },
-    decrement: (state) => {
-      if (state.productDetailsCount > 0) {
-        state.productDetailsCount -= 1;
+    increment: (state, action) => {
+      console.log(action);
+      let check = state.cart.some(
+        (products) => products.id == action.payload.id
+      );
+      console.log(check);
+      if (check) {
+        let newCart = state.cart.map((ele) => {
+          if (action.payload.id == ele.id) {
+            ele.item += 1;
+            state.productsData.item += 1;
+          }
+          return ele;
+        });
+        state.cart = newCart;
+      } else {
+        state.productsData.item += 1;
       }
+
+      console.log(action.payload);
+      console.log(state.cart);
     },
+    decrement: (state, action) => {
+      console.log(action);
+
+      let newCart = state.cart.map((ele) => {
+        if (action.payload.id == ele.id && ele.item > 0) {
+          ele.item -= 1;
+          state.productsData.item -= 1;
+        }
+        return ele;
+      });
+      state.cart = newCart;
+
+      console.log(action.payload);
+      console.log(state.cart);
+    },
+    cartDelet: (state, action) => {
+      let newCart = state.cart.filter((ele) => ele.id !== action.payload.id);
+
+      state.cart = newCart;
+    },
+
     addToCart: (state, action) => {
       let check = state.cart.some(
         (products) => products.id == action.payload.id
       );
 
       if (check) {
-        increment(action.payload.item);
-        console.log(action.payload.item);
+        increment(action.payload);
+        console.log(action.payload);
       } else {
-        action.payload = { ...action.payload, item: 1 };
-
+        increment(action.payload);
         state.cart = [...state.cart, action.payload];
+        console.log(state.cart);
       }
-      console.log(state.cart);
+    },
+    cartEmpty: (state, action) => {
+      state.cart = [];
     },
   },
   extraReducers: (builder) => {
@@ -79,8 +117,7 @@ const products = createSlice({
     });
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.productsLoading = false;
-      state.productsData = action.payload;
-      console.log(action.payload);
+      state.productsData = { ...action.payload, item: 1 };
     });
     builder.addCase(getAllProducts.rejected, (state, action) => {
       state.productsLoading = false;
@@ -98,4 +135,5 @@ const products = createSlice({
 
 export const allProducts = products.reducer;
 
-export const { increment, decrement, addToCart } = products.actions;
+export const { increment, decrement, addToCart, cartDelet, cartEmpty } =
+  products.actions;

@@ -6,7 +6,9 @@ import HeaderCart from "./HeaderCart";
 import HeaderSideBar from "./HeaderSideBar";
 import DarkLight from "./DarkLight";
 import Link from "next/link";
-
+export const metadata = {
+  description: "E Market",
+};
 function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4 text-wrap flex-wrap">
@@ -36,7 +38,7 @@ function NavList() {
       </Typography>
       <Typography variant="small" className="p-1 font-medium">
         <Link
-          href="/category/Skincare"
+          href="/category/skin-care"
           className="flex items-center hover:text-blue-500 transition-colors hover:underline underline-offset-2"
         >
           Skincare
@@ -120,7 +122,7 @@ const Header = () => {
         <div className="flex gap-2 items-center ">
           <HeaderSideBar />
           <Typography className="mr-4 cursor-pointer text-xl md:text-3xl lg:text-5xl font-bold hover:text-blue-500 transition-colors ">
-            Eco Market
+            E Market
           </Typography>
         </div>
 

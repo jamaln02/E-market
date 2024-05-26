@@ -17,7 +17,7 @@ const HeaderSideBar = () => {
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const { categoriesData } = useSelector((state) => state.allProducts);
-  console.log(categoriesData);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());

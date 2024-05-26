@@ -33,13 +33,13 @@ const HeaderCart = () => {
           </i>
         </div>
       </PopoverHandler>
-      <PopoverContent className="p-0" {...handleOpen}>
+      <PopoverContent className="p-0 hidden lg:block" {...handleOpen}>
         <div className=" bg-white dark:bg-gray-800 max-w-[350px] max-h-[270px] text-center flex flex-col items-center text-main rounded-md border-blue-600 border overflow-y-scroll">
           <div className="border-b-[2px] border-main shadow-md w-[100%] rounded-b-md bg-bgcart ">
             <h1 className="p-6 font-bold ">Recenlty Added Products</h1>
           </div>
           {cart?.length === 0 && (
-            <div className="h-fit">
+            <div className="w-fit h-fit">
               {" "}
               <div>
                 <Image
@@ -65,7 +65,7 @@ const HeaderCart = () => {
             cart?.map((ele, ind) => (
               <div
                 key={ind}
-                className="flex items-center gap-2 justify-evenly w-96 bg-gray-300 border-b-2 border-main p-1 "
+                className="flex items-center gap-2 justify-evenly w-[300px] bg-gray-300 border-b-2 border-main p-1 "
               >
                 <img
                   src={ele?.thumbnail}
@@ -83,6 +83,14 @@ const HeaderCart = () => {
                 </h1>
               </div>
             ))}
+          {cart?.length !== 0 && (
+            <div className="my-2 p-2">
+              <Link href={"/cart"}>
+                {" "}
+                <Button className="bg-main">View My Shopping Cart</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </PopoverContent>
     </Popover>
