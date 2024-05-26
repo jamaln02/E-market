@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Drawer,
   Typography,
@@ -8,15 +8,14 @@ import {
   List,
   ListItem,
 } from "@material-tailwind/react";
-import { Bars3Icon } from "@heroicons/react/24/outline";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "@/src/ReduxSystem/ReduxSlices/productsSlice";
 import Link from "next/link";
+import { handleCloseDrawer } from "@/src/ReduxSystem/ReduxSlices/headerSlice";
 const HeaderSideBar = () => {
-  const [open, setOpen] = useState(false);
-  const openDrawer = () => setOpen(true);
-  const closeDrawer = () => setOpen(false);
   const { categoriesData } = useSelector((state) => state.allProducts);
+  const { opendrawer } = useSelector((state) => state.headerSlicee);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,21 +24,20 @@ const HeaderSideBar = () => {
   return (
     <div>
       <div>
-        <Bars3Icon
-          className="h-6 w-6 cursor-pointer hover:text-blue-500"
-          strokeWidth={2}
-          onClick={openDrawer}
-        />
         <Drawer
-          open={open}
-          onClose={closeDrawer}
+          open={opendrawer}
+          onClose={() => dispatch(handleCloseDrawer())}
           className="shadow-none bg-main overflow-y-scroll !max-h-none ddd"
         >
           <div className="mb-2 flex items-center justify-between p-4 text-white ">
             <Typography variant="h4" className="tracking-wide">
               All Categories
             </Typography>
-            <IconButton variant="text" onClick={closeDrawer} color="white">
+            <IconButton
+              variant="text"
+              onClick={() => dispatch(handleCloseDrawer())}
+              color="white"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

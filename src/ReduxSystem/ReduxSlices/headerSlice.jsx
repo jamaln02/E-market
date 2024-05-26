@@ -25,6 +25,7 @@ const data = {
   searchResultsData: null,
   searchResultsError: null,
   inputValue: "",
+  opendrawer: false,
 };
 
 const headerSlice = createSlice({
@@ -36,6 +37,12 @@ const headerSlice = createSlice({
     },
     handleSearch: (state, action) => {
       state.inputValue = action.payload.target.value;
+    },
+    handleOpenDrawer: (state, action) => {
+      state.opendrawer = true;
+    },
+    handleCloseDrawer: (state, action) => {
+      state.opendrawer = false;
     },
   },
   extraReducers: (builder) => {
@@ -54,4 +61,5 @@ const headerSlice = createSlice({
 });
 
 export const headerSlicee = headerSlice.reducer;
-export const { openNav, handleSearch } = headerSlice.actions;
+export const { openNav, handleSearch, handleOpenDrawer, handleCloseDrawer } =
+  headerSlice.actions;

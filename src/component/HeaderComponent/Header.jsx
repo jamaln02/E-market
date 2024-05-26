@@ -6,6 +6,7 @@ import HeaderCart from "./HeaderCart";
 import HeaderSideBar from "./HeaderSideBar";
 import DarkLight from "./DarkLight";
 import Link from "next/link";
+import SideBarIcon from "./SideBarIcon";
 export const metadata = {
   description: "E Market",
 };
@@ -120,7 +121,7 @@ const Header = () => {
       </div>
       <div className="flex items-center justify-between ">
         <div className="flex gap-2 items-center ">
-          <HeaderSideBar />
+          <SideBarIcon />
           <Typography className="mr-4 cursor-pointer text-xl md:text-3xl lg:text-5xl font-bold hover:text-blue-500 transition-colors ">
             E Market
           </Typography>

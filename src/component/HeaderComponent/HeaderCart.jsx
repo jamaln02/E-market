@@ -11,13 +11,22 @@ import {
   PopoverHandler,
   PopoverContent,
 } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openNav } from "@/src/ReduxSystem/ReduxSlices/headerSlice";
 const HeaderCart = () => {
   const [openPop, setOpenPop] = useState(false);
   const { cart } = useSelector((state) => state.allProducts);
+  const { nav } = useSelector((state) => state.headerSlicee);
   const handleOpen = {
     onMouseEnter: () => setOpenPop(true),
     onMouseLeave: () => setOpenPop(false),
+  };
+
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    if (window.innerWidth <= 1024) {
+      dispatch(openNav(!nav));
+    }
   };
   return (
     <Popover open={openPop} handler={setOpenPop}>
@@ -27,7 +36,7 @@ const HeaderCart = () => {
             {cart?.length}
           </span>
           <i className="text-4xl leading-[0px]  p-0 m-0 text-white hover:text-blue-500 cursor-pointer">
-            <Link href={"/cart"}>
+            <Link href={"/cart"} onClick={handleClick}>
               <BsCart4 />
             </Link>
           </i>
