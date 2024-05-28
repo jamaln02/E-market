@@ -27,10 +27,10 @@ const TABLE_HEAD = [
 const Page = () => {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.allProducts);
-
+  console.log(cart);
   return (
     <div className="container mx-auto p-4 flex flex-col justify-center items-center">
-      {cart.length > 0 ? (
+      {cart?.length > 0 ? (
         <div className=" h-full w-full  ">
           <div className="flex justify-center">
             <h1 className="lg:hidden text-lg font-bold text-main border-x-2 border-main px-4  my-4 text-center ">
@@ -41,15 +41,15 @@ const Page = () => {
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
-                  {TABLE_HEAD.map((head) => (
+                  {TABLE_HEAD?.map((head, ind) => (
                     <th
-                      key={head}
-                      className="border-b border-blue-gray-100  bg-bgcart p-4"
+                      key={ind}
+                      className="border-b border-blue-gray-100  bg-bgcart p-4 "
                     >
                       <Typography
                         variant="h6"
                         color="blue-gray"
-                        className="font-bold leading-none opacity-70"
+                        className="font-bold leading-none opacity-70 text-center"
                       >
                         {head}
                       </Typography>
@@ -59,7 +59,7 @@ const Page = () => {
               </thead>
               <tbody className="dark:bg-gray-500">
                 {cart?.map((ele, index) => {
-                  const isLast = index === cart.length - 1;
+                  const isLast = index === cart?.length - 1;
                   const classes = isLast
                     ? "p-4"
                     : "p-4 border-b border-blue-gray-50";
@@ -70,7 +70,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal dark:text-gray-200"
+                          className="font-normal dark:text-gray-200 text-center"
                         >
                           {index + 1}
                         </Typography>
@@ -79,8 +79,14 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal dark:text-gray-200"
+                          className="font-normal dark:text-gray-200 flex items-center"
                         >
+                          <Image
+                            src={ele?.thumbnail}
+                            alt="product image"
+                            width={50}
+                            height={50}
+                          />
                           {ele?.title}
                         </Typography>
                       </td>
@@ -88,7 +94,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal dark:text-gray-200"
+                          className="font-normal dark:text-gray-200 text-center"
                         >
                           {`EGP ${(
                             ele?.price -
@@ -100,19 +106,19 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-medium dark:text-gray-200"
+                          className="font-medium dark:text-gray-200 "
                         >
-                          <div className="flex items-center text-gray-900 rounded-md  p-0.5">
+                          <div className="flex items-center justify-center text-gray-900 rounded-md  p-0.5">
                             {" "}
                             <Button
                               className="bg-bgcart text-lg  px-3 py-0.5 font-bold rounded-md "
                               onClick={() => dispatch(decrement(ele))}
-                              disabled={ele.item <= 1}
+                              disabled={ele?.item <= 1}
                             >
                               -
                             </Button>
                             <p className="bg-white dark:bg-gray-600 px-3 py-0.5 font-bold border border-gray-600 dark:border-gray-200 dark:text-gray-200  rounded-md mx-0.5">
-                              {ele.item}
+                              {ele?.item}
                             </p>
                             <Button
                               className="bg-bgcart text-lg  px-3 py-0.5 font-bold   rounded-md"
@@ -127,13 +133,13 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal dark:text-gray-200"
+                          className="font-normal dark:text-gray-200 text-center"
                         >
                           {`EGP ${
                             (
                               ele?.price -
                               (ele?.price * ele?.discountPercentage) / 100
-                            ).toFixed(2) * ele.item
+                            ).toFixed(2) * ele?.item
                           }`}
                         </Typography>
                       </td>
@@ -141,7 +147,7 @@ const Page = () => {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal dark:text-gray-200"
+                          className="font-normal dark:text-gray-200 text-center"
                         >
                           <Button
                             className="text-main font-bold "
@@ -203,6 +209,7 @@ const Page = () => {
             src={emptyImage}
             alt="empty cart"
             width={200}
+            height={200}
             priority={true}
           />
           <p className="my-4 text-gray-700 text-center">

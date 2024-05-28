@@ -15,6 +15,7 @@ import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 import { Button } from "@material-tailwind/react";
 import LoaderPage from "@/src/component/LoaderPage";
+import Image from "next/image";
 
 const ProductPage = () => {
   const { productsid } = useParams();
@@ -55,10 +56,12 @@ const ProductPage = () => {
                 {...setting}
               >
                 <a href={productsData?.thumbnail} {...setting2}>
-                  <img
+                  <Image
                     src={productsData?.thumbnail}
                     alt={`img`}
                     className=" cursor-zoom-in w-full"
+                    width={300}
+                    height={300}
                   />
                 </a>
               </div>
@@ -71,10 +74,12 @@ const ProductPage = () => {
                     className="w-[90px] md:w-[100px] lg:w-[120px] max-w-full flex items-center justify-start"
                   >
                     <a href={ele} {...setting2}>
-                      <img
+                      <Image
                         src={ele}
                         alt={`img${ind}`}
                         className=" cursor-zoom-in"
+                        width={90}
+                        height={90}
                       />
                     </a>
                   </div>

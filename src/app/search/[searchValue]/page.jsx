@@ -10,6 +10,7 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
@@ -52,7 +53,7 @@ const Page = () => {
               <div className="flex justify-evenly flex-wrap gap-4">
                 {searchResultsData?.map((ele, ind) => (
                   <div key={ind}>
-                    <Card className="w-80 rounded-none mt-10 dark:bg-gray-700 border-b border-s  ">
+                    <Card className="w-[100%] rounded-none mt-10 dark:bg-gray-700 border-b border-s  ">
                       <div className="absolute  top-[30px] left-[-1px] w-2/5 h-12 bg-main  text-white z-10 text-center content-center font-bold">
                         {ele?.category}
                       </div>
@@ -60,10 +61,12 @@ const Page = () => {
                         floated={false}
                         className="h-80 rounded-none shadow-2xl relative mx-0 mt-0 border-none  "
                       >
-                        <img
+                        <Image
                           src={ele?.thumbnail}
                           alt="card-image"
                           className="h-full w-full object-cover "
+                          width={300}
+                          height={200}
                         />
                       </CardHeader>
                       <CardBody>

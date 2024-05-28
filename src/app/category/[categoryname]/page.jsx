@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import LoaderPage from "@/src/component/LoaderPage";
+import Image from "next/image";
 const Page = () => {
   const { categoryname } = useParams();
   const { productsData, productsLoading } = useSelector(
@@ -29,7 +30,7 @@ const Page = () => {
       {productsLoading ? (
         <LoaderPage />
       ) : (
-        <div className="mt-6 md:mt-16 p-5 text-gray-500 dark:text-gray-600">
+        <div className="mt-6 md:mt-16 p-5 mx-2 text-gray-500 dark:text-gray-600">
           <div className=" bg-gray-300 dark:bg-gray-400 shadow-2xl border-s-8 border-main">
             <h1 className="text-lg md:text-xl lg:text-2xl p-2 font-bold">
               SEE OUR <span className="capitalize">{categoryname}</span>
@@ -38,7 +39,7 @@ const Page = () => {
           <div className="flex justify-evenly flex-wrap gap-4">
             {productsData?.products?.map((ele, ind) => (
               <div key={ind}>
-                <Card className="w-80 rounded-none mt-10 dark:bg-gray-700 border-b border-s  ">
+                <Card className="w-[100%] rounded-none mt-10 dark:bg-gray-700 border-b border-s  ">
                   <div className="absolute  top-[30px] left-[-1px] w-2/5 h-12 bg-main  text-white z-10 text-center content-center font-bold">
                     {ele?.category}
                   </div>
@@ -46,10 +47,12 @@ const Page = () => {
                     floated={false}
                     className="h-80 rounded-none shadow-2xl relative mx-0 mt-0 border-none  "
                   >
-                    <img
+                    <Image
                       src={ele?.thumbnail}
                       alt="card-image"
                       className="h-full w-full object-cover "
+                      width={300}
+                      height={300}
                     />
                   </CardHeader>
                   <CardBody>
